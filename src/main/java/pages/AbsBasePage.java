@@ -28,15 +28,6 @@ public abstract class AbsBasePage {
                     .as("String should be same as {}", insertText)
                     .isEqualTo(insertText);
         }
-        else if (element.getText() == null) {
-            String exactText = (String) ((JavascriptExecutor)driver)
-                    .executeScript("return arguments[0].childNodes[0].nodeValue;", element);
-
-            assertThat(exactText)
-                    .as("String should be same as {}", insertText)
-                    .isEqualTo(insertText);
-
-        }
         else {
             assertThat(element.getText())
                     .as("String should be same as {}", insertText)
