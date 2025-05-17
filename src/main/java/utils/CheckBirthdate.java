@@ -30,7 +30,7 @@ public class CheckBirthdate {
         if (day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 275760) {
             return true;
         }
-        System.out.println("---Incorrect date!---");
+        System.out.println("---Unacceptable date!---");
         return false;
     }
     }

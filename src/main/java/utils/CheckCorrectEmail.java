@@ -15,7 +15,7 @@ public class CheckCorrectEmail {
         else if (matcher.find()) {
             return true;
         }
-        System.out.println("---Incorrect email---");
+        System.out.println("---Unacceptable email---");
 
         return false;
     }

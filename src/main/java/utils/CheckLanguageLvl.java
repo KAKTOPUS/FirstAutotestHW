@@ -62,7 +62,7 @@ public class CheckLanguageLvl {
             }
         }
 
-        return "---Incorrect languageLvl---";
+        return "---Unacceptable languageLvl---";
     }
 
     public String isLanguageOptionExist(String languageOption) {
@@ -88,7 +88,7 @@ public class CheckLanguageLvl {
         if (languageLvl >= 1 && languageLvl <= 4) {
             return true;
         }
-        System.out.println("---Incorrect languageLvl!---");
+        System.out.println("---Unacceptable languageLvl!---");
 
         return false;
     }

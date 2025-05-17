@@ -5,12 +5,12 @@ import java.util.regex.Pattern;
 
 public class CheckPasswords {
     public boolean isPasswordEquals(String insertPassword, String confirmPassword) {
-        Pattern pattern = Pattern.compile("^.{1,20}$");
+        Pattern pattern = Pattern.compile("^(?=[^\s]*\\s?[^\s]*$)[\\S\\s]{1,20}$");
         Matcher matcherInsertPassword = pattern.matcher(insertPassword);
         Matcher matcherConfirmPassword = pattern.matcher(confirmPassword);
 
         if (!matcherInsertPassword.find() || !matcherConfirmPassword.find()) {
-            System.out.println("---Passwords is too long---");
+            System.out.println("---Unacceptable password---");
             return false;
         }
         else if(insertPassword.equals(confirmPassword) && !insertPassword.equals("")) {
