@@ -96,7 +96,7 @@ public class RegistrationFormPage extends AbsBasePage {
         return null;
     }
 
-    public void checkRegistrationButton(String name, String email, String password, String confirmPassword, int day, int month, int year, int lvlLanguage) throws InterruptedException {
+    public void checkRegistrationButton(String name, String email, String password, String confirmPassword, int day, int month, int year, int lvlLanguage) {
         CheckPasswords checkPasswords = new CheckPasswords();
 
         WebElement elementRegistrationButton = driver.findElement(By.cssSelector("input[type=submit]"));
@@ -116,7 +116,6 @@ public class RegistrationFormPage extends AbsBasePage {
 
         if (checkPasswords.isPasswordEquals(password,confirmPassword)) {
             elementRegistrationButton.click();
-            Thread.sleep(2000);
 
             checkTextShouldBeSameAs(elementOutputRegistration, expectedText);
         }
