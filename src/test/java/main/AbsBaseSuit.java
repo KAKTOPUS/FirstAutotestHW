@@ -8,8 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class AbsBaseSuit {
 
-    WebDriver driver = null;
-
+    protected WebDriver driver = null;
     protected TestDataGenerator testDataGenerator = null;
 
 
