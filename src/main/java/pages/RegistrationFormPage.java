@@ -1,8 +1,15 @@
 package pages;
 
+import dto.TestDataGenerator;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.*;
+
+import java.time.Duration;
+
 public class RegistrationFormPage extends AbsBasePage {
     public RegistrationFormPage(WebDriver driver) {
         super(driver);
@@ -10,123 +17,122 @@ public class RegistrationFormPage extends AbsBasePage {
 
     Actions action = new Actions(driver);
 
-    public String checkUserNameField(String userName) {
-        CheckUserName checkUserName = new CheckUserName();
+    @Step("Enter name")
+    public String enterNameIntoField(TestDataGenerator testDataGenerator) {
+        String name = testDataGenerator.getName();
         WebElement elementNameField = driver.findElement(By.cssSelector("input#username"));
+        insertTextIntoField(elementNameField, name);
 
-        if (checkUserName.isNameValid(userName)) {
-            insertTextIntoField(elementNameField, userName);
-            checkTextShouldBeSameAs(elementNameField, userName);
-
-            return userName;
-        }
-
-        return null;
+        return name;
     }
 
-    public String checkEmailField(String userEmail) {
-        CheckCorrectEmail checkCorrectEmail = new CheckCorrectEmail();
-
+    @Step("Enter email")
+    public String enterEmailIntoField(TestDataGenerator testDataGenerator) {
+        String email = testDataGenerator.getEmail();
         WebElement elementEmailField = driver.findElement(By.cssSelector("input#email"));
-        if (checkCorrectEmail.isEmailValid(userEmail)) {
-            insertTextIntoField(elementEmailField, userEmail);
-            checkTextShouldBeSameAs(elementEmailField, userEmail);
+        insertTextIntoField(elementEmailField, email);
 
-            return userEmail;
-        }
-
-        return null;
+        return email;
     }
 
-    public void checkPasswordFields(String insertPassword, String confirmPassword) {
+    @Step("Enter password")
+    public String enterPasswordIntoField(TestDataGenerator testDataGenerator) {
+        String password = testDataGenerator.getPassword();
         WebElement elementPassword = driver.findElement(By.cssSelector("input#password"));
+        insertTextIntoField(elementPassword, password);
+
+        return password;
+    }
+
+    @Step("Enter confirm password")
+    public String enterConfirmPasswordIntoField(String confirmPassword) {
         WebElement elementConfirmPassword = driver.findElement(By.cssSelector("input#confirm_password"));
+        insertTextIntoField(elementConfirmPassword, confirmPassword);
 
-            insertTextIntoField(elementPassword, insertPassword);
-            checkTextShouldBeSameAs(elementPassword, insertPassword);
-
-            insertTextIntoField(elementConfirmPassword, confirmPassword);
-            checkTextShouldBeSameAs(elementConfirmPassword, confirmPassword);
-        }
-
-    public String checkBirthdateField(int birthdateDay, int birthdateMonth, int birthdateYear) {
-        CheckBirthdate checkBirthdate = new CheckBirthdate();
-
-        String birthdateDayStr = Integer.toString(birthdateDay);
-        String birthdateMonthStr = Integer.toString(birthdateMonth);
-        String birthdateYearStr = Integer.toString(birthdateYear);
-
-        String birthdateReverse = String.format("%s-%s-%s", checkBirthdate.isBirthdateYearCorrect(birthdateYear)
-                                                          , checkBirthdate.isBirthdateMonthCorrect(birthdateMonth)
-                                                          , checkBirthdate.isBirthdateDayCorrect(birthdateDay));
-
-        if (checkBirthdate.isValidDate(birthdateDay, birthdateMonth, birthdateYear)) {
-
-            WebElement elementBirthdateField = driver.findElement(By.cssSelector("input#birthdate"));
-
-            action.click(elementBirthdateField)
-                    .sendKeys(elementBirthdateField, birthdateDayStr)
-                    .sendKeys(Keys.ARROW_RIGHT)
-                    .sendKeys(elementBirthdateField, birthdateMonthStr)
-                    .sendKeys(Keys.ARROW_RIGHT)
-                    .sendKeys(elementBirthdateField, birthdateYearStr)
-                    .perform();
-
-            checkTextShouldBeSameAs(elementBirthdateField, birthdateReverse);
-
-            return birthdateReverse;
-        }
-
-        return null;
+        return confirmPassword;
     }
 
-    public String checkLanguageKnowledgeField(int lvl) {
-        CheckLanguageLvl languageLvl = new CheckLanguageLvl();
+    @Step("Enter birthdate")
+    public String enterBirthdateIntoField(TestDataGenerator testDataGenerator) {
+        FormatDate formatDate = new FormatDate();
+        WebElement elementBirthdateField = driver.findElement(By.cssSelector("input#birthdate"));
 
-        if (languageLvl.isLanguageValid(lvl)) {
+        String birthdateDayStr = String.valueOf(testDataGenerator.getDate().getDayOfMonth());
+        String birthdateMonthStr = String.valueOf(testDataGenerator.getDate().getMonthValue());
+        String birthdateYearStr = String.valueOf(testDataGenerator.getDate().getYear());
 
-            WebElement elementLanguageKnowledgeField = driver.findElement(By.cssSelector("select#language_level"));
+        String birthdate = String.format("%s-%s-%s"
+                , birthdateYearStr
+                , formatDate.getFormatMonth(birthdateMonthStr)
+                , formatDate.getFormatDay(birthdateDayStr));
 
-            String languageOption = languageLvl.checkLanguageLvl(driver, elementLanguageKnowledgeField, lvl);
-            String languageLvlTranslate = languageLvl.isLanguageOptionExist(languageOption);
+        action.click(elementBirthdateField)
+                .sendKeys(elementBirthdateField, birthdateDayStr)
+                .sendKeys(elementBirthdateField, birthdateMonthStr)
+                .sendKeys(elementBirthdateField, birthdateYearStr)
+                .perform();
 
-            return languageLvlTranslate;
-        }
-
-        return null;
+        return birthdate;
     }
 
-    public void checkRegistrationButton(String name, String email, String password, String confirmPassword, int day, int month, int year, int lvlLanguage) {
-        CheckPasswords checkPasswords = new CheckPasswords();
+    @Step("Enter language lvl")
+    public String enterLanguageLvl(TestDataGenerator testDataGenerator) {
+        FormatLanguageLvl formatLanguageLvl = new FormatLanguageLvl();
+        WebElement elementLanguageKnowledgeField = driver.findElement(By.cssSelector("select#language_level"));
+        int generateLanguageLvl = testDataGenerator.getLanguageLvl();
 
+        String languageOption = formatLanguageLvl.returnFormatLanguage(driver, elementLanguageKnowledgeField, generateLanguageLvl);
+        String languageLvlTranslate = formatLanguageLvl.returnTranslateLanguageLvl(languageOption);
+
+        return languageLvlTranslate;
+    }
+
+    @Step("Check registration button")
+    public void checkRegistrationButton(TestDataGenerator testDataGenerator) {
         WebElement elementRegistrationButton = driver.findElement(By.cssSelector("input[type=submit]"));
         WebElement elementOutputRegistration = driver.findElement(By.cssSelector("div#output"));
 
-        String expectedText = String.format(
-                 "Имя пользователя: %s\n" +
-                 "Электронная почта: %s\n" +
-                 "Дата рождения: %s\n" +
-                 "Уровень языка: %s"
-                , checkUserNameField(name)
-                , checkEmailField(email)
-                , checkBirthdateField(day, month, year)
-                , checkLanguageKnowledgeField(lvlLanguage));
+        String name = enterNameIntoField(testDataGenerator);
+        String email = enterEmailIntoField(testDataGenerator);
+        String password = enterPasswordIntoField(testDataGenerator);
+        String confirmPassword = "";
+        String date = enterBirthdateIntoField(testDataGenerator);
+        String languageLvl = enterLanguageLvl(testDataGenerator);
 
-        checkPasswordFields(password, confirmPassword);
+        if (testDataGenerator.randomTrue()) {
 
-        if (checkPasswords.isPasswordEquals(password,confirmPassword)) {
+            confirmPassword = password;
+            enterConfirmPasswordIntoField(confirmPassword);
+
             elementRegistrationButton.click();
+
+            String expectedText = String.format(
+                            "Имя пользователя: %s\n" +
+                            "Электронная почта: %s\n" +
+                            "Дата рождения: %s\n" +
+                            "Уровень языка: %s"
+                            , name
+                            , email
+                            , date
+                            , languageLvl);
 
             checkTextShouldBeSameAs(elementOutputRegistration, expectedText);
         }
         else {
+
+            confirmPassword = testDataGenerator.getConfirmPassword();
+            enterConfirmPasswordIntoField(confirmPassword);
+
             elementRegistrationButton.click();
-            Alert alert = driver.switchTo().alert();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            driver.switchTo().alert();
 
             String alertMsg = alert.getText();
             alert.accept();
+
             if (alertMsg.equals("Пароли не совпадают!")) {
-                System.out.println("Пароли не совпадают!");
+                System.out.println("---Passwords is not equals!---");
             }
         }
     }

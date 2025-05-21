@@ -3,6 +3,7 @@ package factory;
 import exceptions.BrowserNotSupportedException;
 import factory.settings.ChromeSettings;
 import factory.settings.FirefoxSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public class CheckLanguageLvl {
+public class FormatLanguageLvl {
 
-    public String checkLanguageLvl(WebDriver driver, WebElement element, int lvl) {
+    public String returnFormatLanguage(WebDriver driver, WebElement element, int lvl) {
         Actions action = new Actions(driver);
         Select select = new Select(element);
 
@@ -65,7 +65,8 @@ public class CheckLanguageLvl {
         return "---Unacceptable languageLvl---";
     }
 
-    public String isLanguageOptionExist(String languageOption) {
+    public String returnTranslateLanguageLvl(String languageOption) {
+
         switch (languageOption) {
             case "Начальный": {
                 return "beginner";
@@ -84,12 +85,4 @@ public class CheckLanguageLvl {
         return null;
     }
 
-    public boolean isLanguageValid(int languageLvl) {
-        if (languageLvl >= 1 && languageLvl <= 4) {
-            return true;
-        }
-        System.out.println("---Unacceptable languageLvl!---");
-
-        return false;
-    }
 }
