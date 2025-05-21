@@ -5,7 +5,7 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 
 public class FirefoxSettings implements IBrowserSettings {
 
-    String launchParameter = System.getProperty("launchParameter");
+    private String launchParameter = System.getProperty("launchParameter");
 
     public AbstractDriverOptions settings() {
 

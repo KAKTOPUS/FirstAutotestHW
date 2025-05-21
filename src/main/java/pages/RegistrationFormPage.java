@@ -124,6 +124,7 @@ public class RegistrationFormPage extends AbsBasePage {
             enterConfirmPasswordIntoField(confirmPassword);
 
             elementRegistrationButton.click();
+
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert();

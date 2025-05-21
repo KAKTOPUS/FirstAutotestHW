@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class WebDriverFactory {
 
-    String browser = System.getProperty("browser");
+    private String browser = System.getProperty("browser");
 
     public WebDriver getDriver() {
         switch (browser) {
