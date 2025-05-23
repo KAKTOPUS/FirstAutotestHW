@@ -10,7 +10,7 @@ public class ChromeSettings implements IBrowserSettings {
 
         ChromeOptions options = new ChromeOptions();
 
-        switch (launchParameter) {
+        switch (launchParameter.toLowerCase()) {
 
             case "fullscreen": {
                 options.addArguments("--maximize");

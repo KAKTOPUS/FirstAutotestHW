@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class TestDataGenerator {
-    private static Faker faker = new Faker();
+    private Faker faker = new Faker();
     private String name = faker.name().fullName();
     private String email = faker.internet().emailAddress();
     private String password = faker.internet().password(10, 16, true, true, true);

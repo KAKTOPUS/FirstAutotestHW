@@ -11,7 +11,7 @@ public class FirefoxSettings implements IBrowserSettings {
 
         FirefoxOptions options = new FirefoxOptions();
 
-        switch (launchParameter) {
+        switch (launchParameter.toLowerCase()) {
             case "fullscreen": {
                 options.addArguments("--fullscreen");
                 return options;

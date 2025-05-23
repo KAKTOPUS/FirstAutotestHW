@@ -15,7 +15,7 @@ public class WebDriverFactory {
     private String browser = System.getProperty("browser");
 
     public WebDriver getDriver() {
-        switch (browser) {
+        switch (browser.toLowerCase()) {
             case "chrome": {
                 return new ChromeDriver((ChromeOptions) new ChromeSettings().settings());
             }

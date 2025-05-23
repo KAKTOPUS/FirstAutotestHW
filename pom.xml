@@ -34,7 +34,7 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
             </dependency>
-            <!-- Allure bom -->
+            <!-- Allure BOM -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-bom</artifactId>
@@ -42,7 +42,7 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-            <!-- Junit bom -->
+            <!-- Junit BOM -->
         <dependency>
             <groupId>org.junit</groupId>
             <artifactId>junit-bom</artifactId>
@@ -50,13 +50,13 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-            <!-- Allure junit5 -->
+            <!-- Allure Junit5 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>${allure-junit.version}</version>
         </dependency>
-             <!-- Slf4j simple -->
+             <!-- Slf4j Simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -69,7 +69,7 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium-java.version}</version>
         </dependency>
-            <!-- Java faker -->
+            <!-- Java Faker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
@@ -81,7 +81,7 @@
     <build>
         <plugins>
             <plugin>
-                <!-- Maven surefire plugin -->
+                <!-- Maven Surefire Plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
@@ -105,7 +105,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-                <!-- Allure maven plugin -->
+                <!-- Allure Maven Plugin -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
@@ -115,7 +115,7 @@
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
-                 <!-- Maven compiler plugin -->
+                 <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
