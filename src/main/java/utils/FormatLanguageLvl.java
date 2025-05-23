@@ -22,6 +22,7 @@ public class FormatLanguageLvl {
                 return select.getFirstSelectedOption().getDomAttribute("value");
             }
             case 4: {
+                select.selectByIndex(4);
                 return select.getFirstSelectedOption().getDomAttribute("value");
             }
         }
