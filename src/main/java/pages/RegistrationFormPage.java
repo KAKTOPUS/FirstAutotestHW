@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.*;
-
 import java.time.Duration;
 
 public class RegistrationFormPage extends AbsBasePage {
@@ -57,14 +56,12 @@ public class RegistrationFormPage extends AbsBasePage {
         FormatDate formatDate = new FormatDate();
         WebElement elementBirthdateField = driver.findElement(By.cssSelector("input#birthdate"));
 
-        String birthdateDayStr = String.valueOf(testDataGenerator.getDate().getDayOfMonth());
-        String birthdateMonthStr = String.valueOf(testDataGenerator.getDate().getMonthValue());
-        String birthdateYearStr = String.valueOf(testDataGenerator.getDate().getYear());
+        String birthdate = String.valueOf(testDataGenerator.getDate());
+        String outputBirthdate = String.valueOf(formatDate.getFormatDate(birthdate));
 
-        String birthdate = String.format("%s-%s-%s"
-                , birthdateYearStr
-                , formatDate.getFormatMonth(birthdateMonthStr)
-                , formatDate.getFormatDay(birthdateDayStr));
+        String birthdateDayStr = String.valueOf(formatDate.getFormatDate(birthdate).getDayOfMonth());
+        String birthdateMonthStr = String.valueOf(formatDate.getFormatDate(birthdate).getMonthValue());
+        String birthdateYearStr = String.valueOf(formatDate.getFormatDate(birthdate).getYear());
 
         action.click(elementBirthdateField)
                 .sendKeys(elementBirthdateField, birthdateDayStr)
@@ -72,7 +69,7 @@ public class RegistrationFormPage extends AbsBasePage {
                 .sendKeys(elementBirthdateField, birthdateYearStr)
                 .perform();
 
-        return birthdate;
+        return outputBirthdate;
     }
 
     @Step("Enter language lvl")
@@ -81,10 +78,9 @@ public class RegistrationFormPage extends AbsBasePage {
         WebElement elementLanguageKnowledgeField = driver.findElement(By.cssSelector("select#language_level"));
         int generateLanguageLvl = testDataGenerator.getLanguageLvl();
 
-        String languageOption = formatLanguageLvl.returnFormatLanguage(driver, elementLanguageKnowledgeField, generateLanguageLvl);
-        String languageLvlTranslate = formatLanguageLvl.returnTranslateLanguageLvl(languageOption);
+        String languageLvl = formatLanguageLvl.getFormatLanguage(elementLanguageKnowledgeField, generateLanguageLvl);
 
-        return languageLvlTranslate;
+        return languageLvl;
     }
 
     @Step("Check registration button")

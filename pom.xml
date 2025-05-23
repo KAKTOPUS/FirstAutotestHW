@@ -40,7 +40,6 @@
             <artifactId>allure-bom</artifactId>
             <version>${allure.version}</version>
             <type>pom</type>
-            <scope>import</scope>
         </dependency>
             <!-- Junit BOM -->
         <dependency>
@@ -48,7 +47,6 @@
             <artifactId>junit-bom</artifactId>
             <version>${junit-bom.version}</version>
             <type>pom</type>
-            <scope>import</scope>
         </dependency>
             <!-- Allure Junit5 -->
         <dependency>

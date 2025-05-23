@@ -1,88 +1,32 @@
 package utils;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class FormatLanguageLvl {
 
-    public String returnFormatLanguage(WebDriver driver, WebElement element, int lvl) {
-        Actions action = new Actions(driver);
+    public String getFormatLanguage(WebElement element, int languageLvl) {
         Select select = new Select(element);
 
-        switch (lvl) {
+        switch (languageLvl) {
             case 1: {
-                action.click(element)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.ENTER)
-                        .perform();
-
-                String beginnerLvl = select.getFirstSelectedOption().getText();
-
-                return beginnerLvl;
+                select.selectByIndex(1);
+                return select.getFirstSelectedOption().getDomAttribute("value");
             }
             case 2: {
-                action.click(element)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.ENTER)
-                        .perform();
-
-                String intermediateLvl = select.getFirstSelectedOption().getText();
-
-                return intermediateLvl;
+                select.selectByIndex(2);
+                return select.getFirstSelectedOption().getDomAttribute("value");
             }
             case 3: {
-                action.click(element)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.ENTER)
-                        .perform();
-
-                String advancedLvl = select.getFirstSelectedOption().getText();
-
-                return advancedLvl;
+                select.selectByIndex(3);
+                return select.getFirstSelectedOption().getDomAttribute("value");
             }
-
             case 4: {
-                action.click(element)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.DOWN)
-                        .sendKeys(Keys.ENTER)
-                        .perform();
-
-                String nativeLvl = select.getFirstSelectedOption().getText();
-
-                return nativeLvl;
+                return select.getFirstSelectedOption().getDomAttribute("value");
             }
         }
 
         return "---Unacceptable languageLvl---";
-    }
-
-    public String returnTranslateLanguageLvl(String languageOption) {
-
-        switch (languageOption) {
-            case "Начальный": {
-                return "beginner";
-            }
-            case "Средний": {
-                return "intermediate";
-            }
-            case "Продвинутый": {
-                return "advanced";
-            }
-            case "Носитель языка": {
-                return "native";
-            }
-        }
-
-        return null;
     }
 
 }

@@ -1,28 +1,12 @@
 package utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class FormatDate {
 
-    public String getFormatDay(String day) {
-        int dayInt = Integer.parseInt(day);
-        switch (dayInt) {
-            case 1, 2, 3, 4, 5, 6, 7, 8, 9: {
-                return String.format("0%s", day);
-            }
-        }
-
-        return day;
+    public LocalDate getFormatDate(String date) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
-
-    public String getFormatMonth(String month) {
-        int monthInt = Integer.parseInt(month);
-        switch (monthInt) {
-            case 1, 2, 3, 4, 5, 6, 7, 8, 9: {
-                return String.format("0%s", month);
-            }
-        }
-
-        return month;
-    }
-
 }
 
